@@ -1,6 +1,6 @@
 package serialisation
 
-import java.io.{ObjectOutputStream, ByteArrayOutputStream}
+import java.io.{ObjectInputStream, ByteArrayInputStream, ObjectOutputStream, ByteArrayOutputStream}
 
 import kafka.message.Message
 import kafka.serializer.Encoder
@@ -17,6 +17,12 @@ object EventEncoder {
     oos.writeObject(event)
     oos.close()
     baos.toByteArray()
+  }
+
+  def toObject(bytes: Array[Byte]): Event = {
+    val bis = new ByteArrayInputStream(bytes);
+    val in = new ObjectInputStream(bis);
+    in.readObject().asInstanceOf[Event];
   }
 }
 

@@ -19,8 +19,11 @@ object Application extends Controller {
         BadRequest(Json.obj("status" -> "OK", "message" -> JsError.toFlatJson(errors)))
       },
       event => {
-        val kafkaProducer = Producer[Event]("testTopic")
-        kafkaProducer.send(EventEncoder.toBytes(event))
+        val kafkaProducer = Producer[String]("kafka.testTopic")
+
+        implicit val writes = Json.writes[Event]
+
+        kafkaProducer.send(Json.toJson(event).toString)
         Ok(Json.obj("status" -> "OK"))
       }
     )
