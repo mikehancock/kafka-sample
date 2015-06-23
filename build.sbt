@@ -2,7 +2,7 @@ name := "kafkaSample"
 
 version := "1.0"
 
-lazy val `kafkasample` = (project in file(".")).enablePlugins(PlayScala)
+lazy val `kafkasample` = (project in file(".")).enablePlugins(PlayScala, JavaServerAppPackaging)
 
 scalaVersion := "2.10.5"
 
