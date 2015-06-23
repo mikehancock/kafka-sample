@@ -1,4 +1,4 @@
 deployment:
-  pre:
+  commands:
     - sbt universal:packageBin
     - cp ./target/universal/kafkasample*.zip $CIRCLE_ARTIFACTS/
