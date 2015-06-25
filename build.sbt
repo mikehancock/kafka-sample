@@ -2,7 +2,7 @@ name := "kafkaSample"
 
 version := "1.0"
 
-lazy val `kafkasample` = (project in file(".")).enablePlugins(PlayScala, JavaServerAppPackaging)
+lazy val `kafkasample` = (project in file(".")).enablePlugins(PlayScala, DockerPlugin)
 
 scalaVersion := "2.10.5"
 
@@ -17,4 +17,10 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.5" % "test"
 )
 
-unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
+unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
+
+maintainer in Docker := "Michael Hancock"
+
+dockerBaseImage := "java:8"
+
+dockerExposedPorts := Seq(9000)
